@@ -1,13 +1,4 @@
-import signUpUser from './4-user-promise';
-import uploadPhoto from './5-photo-reject';
-
-export default async function handleProfileSignup(firstName, lastName, fileName) {
-  return Promise
-    .allSettled([signUpUser(firstName, lastName), uploadPhoto(fileName)])
-    .then((res) => (
-      res.map((o) => ({
-        status: o.status,
-        value: o.status === 'fulfilled' ? o.value : String(o.reason),
-      }))
-    ));
+export default function loadBalancer(chinaDownload, USDownload) {
+  // Return a new promise that settles with the outcome of the first resolving/rejecting promise
+  return Promise.race([chinaDownload, USDownload]);
 }
