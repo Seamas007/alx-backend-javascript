@@ -1,17 +1,17 @@
-// Function to demonstrate variable assignment and conditional block behavior
+// 101-iterateThroughObject.js
 
-// The taskBlock function takes a boolean value as an argument and returns an array of two boolean values.
-// The variables 'task' and 'task2' are initialized with initial values.
-// Depending on the value of the 'trueOrFalse' parameter, the variables may be updated inside the conditional block.
+/**
+ * Iterates through the provided reportWithIterator and returns the names of employees
+ * as a string separated by |
+ * @param {Iterable} reportWithIterator - Iterator object containing employee data
+ * @returns {string} - Names of employees separated by |
+ */
+export default function iterateThroughObject(reportWithIterator) {
+  const employees = [];
 
-export default function taskBlock(trueOrFalse) {
-  let task = false; // Initialize 'task' with a default value of false
-  let task2 = true; // Initialize 'task2' with a default value of true
-
-  if (trueOrFalse) {
-    task = true;    // Update 'task' to true if 'trueOrFalse' is true
-    task2 = false;  // Update 'task2' to false if 'trueOrFalse' is true
+  for (const employee of reportWithIterator) {
+    employees.push(employee);
   }
 
-  return [task, task2]; // Return an array containing the values of 'task' and 'task2'
+  return employees.join(' | ');
 }
