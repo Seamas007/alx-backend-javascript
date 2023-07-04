@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import getNeighborhoodsList from './2-arrow';
 
 const neighborhoodsList = new getNeighborhoodsList();
