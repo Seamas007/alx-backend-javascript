@@ -1,10 +1,19 @@
-// 3-get_ids_sum.js
-
-function getStudentIdsSum(students) {
-  // Use the reduce function to calculate the sum of student ids
-  const sum = students.reduce((accumulator, student) => accumulator + student.id, 0);
-
-  return sum; // Return the sum of student ids
+/**
+ * Retrieves the sum of ids of a list of students.
+ * @param {{
+ *   id: Number,
+ *   firstName: String,
+ *   location: String
+ * }[]} students - The list of students.
+ * @author Adefemi Oreyomi <https://github.com/seamas007>
+ * @returns {Number}
+ */
+export default function getStudentIdsSum(students) {
+  if (students instanceof Array) {
+    return students.reduce(
+      (prevStudent, curStudent) => prevStudent.id || prevStudent + curStudent.id,
+      0,
+    );
+  }
+  return 0;
 }
-
-export default getStudentIdsSum;

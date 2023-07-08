@@ -1,13 +1,25 @@
-// 8-clean_set.js
+/**
+ * Joins a set of strings with a dash after stripping the strings of
+ * a leading sub string.
+ * @param {Set<String>} set - A collection of strings.
+ * @param {String} startString - The string to strip from the beginning
+ * of each item in the set.
+ * @author Adefemi Oreyomi <https://github.com/seamas007>
+ * @returns {String}
+ */
+export default function cleanSet(set, startString) {
+  const parts = [];
+  if (!set || !startString || !(set instanceof Set) || typeof startString !== 'string') {
+    return '';
+  }
+  for (const value of set.values()) {
+    if (typeof value === 'string' && value.startsWith(startString)) {
+      const valueSubStr = value.substring(startString.length);
 
-function cleanSet(set, startString) {
-  // Filter the set values that start with the specified string
-  const filteredValues = [...set].filter((value) => value.startsWith(startString));
-
-  // Extract the rest of the string after the startString and join them with "-"
-  const cleanedString = filteredValues.map((value) => value.slice(startString.length)).join("-");
-
-  return cleanedString; // Return the resulting string
+      if (valueSubStr && valueSubStr !== value) {
+        parts.push(valueSubStr);
+      }
+    }
+  }
+  return parts.join('-');
 }
-
-export default cleanSet;

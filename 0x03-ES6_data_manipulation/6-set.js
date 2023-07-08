@@ -1,10 +1,9 @@
-// 6-set.js
-
-function setFromArray(arr) {
-  // Create a new Set from the given array
-  const set = new Set(arr);
-
-  return set; // Return the Set
+/**
+ * Creates a set from an array.
+ * @param {Array} array - The source array.
+ * @author Adefemi Oreyomi <https://github.com/seamas007>
+ * @returns {Set}
+ */
+export default function setFromArray(array) {
+  return new Set(array);
 }
-
-export default setFromArray;

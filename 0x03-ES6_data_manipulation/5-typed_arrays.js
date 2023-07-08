@@ -1,21 +1,16 @@
-// 5-typed_arrays.js
-
-function createInt8TypedArray(length, position, value) {
-  // Create a new ArrayBuffer with the specified length
-  const buffer = new ArrayBuffer(length);
-
-  // Check if the position is within the range of the buffer
-  if (position < 0 || position >= length) {
-    throw new Error("Position outside range");
+/**
+ * Creates a buffer array with a given position set to a given value.
+ * @param {Number} length - The length of the buffer.
+ * @param {Number} position - The position to modify.
+ * @param {Number} value - The value to be stored in the position.
+ * @author Adefemi Oreyomi <https://github.com/seamas007>
+ * @returns {DataView}
+ */
+export default function createInt8TypedArray(length, position, value) {
+  if (position >= length) {
+    throw new Error('Position outside range');
   }
-
-  // Create a DataView to access and manipulate the buffer
-  const dataView = new DataView(buffer);
-
-  // Set the Int8 value at the specified position
-  dataView.setInt8(position, value);
-
-  return dataView; // Return the DataView containing the modified buffer
+  const buf = new DataView(new ArrayBuffer(length), 0, length);
+  buf.setInt8(position, value);
+  return buf;
 }
-
-export default createInt8TypedArray;

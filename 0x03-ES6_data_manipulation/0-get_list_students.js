@@ -1,17 +1,12 @@
-// 0-get_list_students.js
-
-// Function that returns an array of objects representing students
-function getListStudents() {
-  // Array of student objects
-  const students = [
+/**
+ * Retrieves a list of students.
+ * @author Adefemi Oreyomi <https://github.com/seamas007>
+ * @returns {{id: Number, firstName: String, location: String}[]}
+ */
+export default function getListStudents() {
+  return [
     { id: 1, firstName: 'Guillaume', location: 'San Francisco' },
     { id: 2, firstName: 'James', location: 'Columbia' },
     { id: 5, firstName: 'Serena', location: 'San Francisco' },
   ];
-
-  // Return the array of student objects
-  return students;
 }
-
-// Export the getListStudents function as the default export
-export default getListStudents;
