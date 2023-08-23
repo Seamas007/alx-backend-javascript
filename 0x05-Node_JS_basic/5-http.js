@@ -5,11 +5,11 @@ const path = process.argv[2];
 const port = 1245;
 
 const countStudents = (path) => {
-  const promise = (res, rej) => {
+  const promise = (resolve, reject) => {
     fs.readFile(path, 'utf8', (err, resData) => {
       if (!err) {
         const printOut = [];
-        let printItem; // item to printed
+        let printItem; // item to be printed
         const data = resData.toString().split('\n');
         let students = data.filter((item) => item);
         students = students.map((item) => item.split(','));
@@ -26,16 +26,17 @@ const countStudents = (path) => {
             fields[students[student][3]].push(students[student][0]);
           }
         }
-        delete fields.field;
+
         for (const key of Object.keys(fields)) {
           printItem = `Number of students in ${key}: ${
-            fields[key].length}. List: ${fields[key].join(', ')}`;
+            fields[key].length
+          }. List: ${fields[key].join(', ')}`;
           console.log(printItem);
           printOut.push(printItem);
         }
-        res(printOut);
+        resolve(printOut);
       } else {
-        rej(new Error('Cannot load the database'));
+        reject(new Error('Cannot load the database'));
       }
     });
   };
@@ -57,12 +58,14 @@ const app = http.createServer((req, res) => {
         res.end(`This is the list of our students\n${data.join('\n')}`);
       })
       .catch((error) => {
-        res.end(error);
+        res.statusCode = 500; // Internal Server Error
+        res.end(error.message);
       });
   }
 });
 
 app.listen(port, () => {
+  console.log(`Server is listening on port ${port}`);
 });
 
 module.exports = app;
